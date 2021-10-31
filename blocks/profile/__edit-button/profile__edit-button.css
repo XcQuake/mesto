@@ -13,7 +13,7 @@
   grid-row-start: 1;
   grid-row-end: 2;
   align-self: center;
-  transition-duration: .6s;
+  transition-duration: .3s;
   cursor: pointer;
 }
 .profile__edit-button:hover {
