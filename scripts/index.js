@@ -20,7 +20,7 @@ function formSubmitHandler(evt) {
 formElement.addEventListener('submit', formSubmitHandler);
 
 document.addEventListener('keyup', (evt) => {
-  if (evt.keyCode === 13) {
+  if (evt.key === 13) {
     formSubmitHandler();
   }
 })
