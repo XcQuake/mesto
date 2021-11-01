@@ -13,3 +13,7 @@
 .gallery__like-button:hover {
   opacity: .6;
 }
+
+.gallery__like-button:active {
+  background-image: url(../../../images/like-icon-active.svg);
+}
