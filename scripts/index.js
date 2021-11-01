@@ -19,7 +19,7 @@ function formSubmitHandler(evt) {
 
 formElement.addEventListener('submit', formSubmitHandler);
 
-document.addEventListener('keyup', (evt) => {
+formElement.addEventListener('keyup', (evt) => {
   if (evt.key === 13) {
     formSubmitHandler();
   }
@@ -27,11 +27,11 @@ document.addEventListener('keyup', (evt) => {
 
 
 function popupOpen() {
-  popup.classList.add('popup__opened');
+  popup.classList.add('popup_opened');
 };
 
 function popupClose() {
-  popup.classList.remove('popup__opened');
+  popup.classList.remove('popup_opened');
 };
 
 editButton.addEventListener('click', popupOpen);
