@@ -21,3 +21,5 @@ ___
 
 ## Cтраница проекта
 ___
+
+https://xcquid.github.io/mesto/index.html
