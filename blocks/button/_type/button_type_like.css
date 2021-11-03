@@ -4,6 +4,7 @@
   height: 19px;
   background-image: url(../../../images/like-icon.svg);
   background-size: contain;
+  background-color: #fff;
   overflow: visible;
 }
 
