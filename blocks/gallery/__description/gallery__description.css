@@ -1,4 +1,6 @@
 .gallery__description {
+  height: 79px;
+  box-sizing: border-box;
   background-color: #fff;
   display: flex;
   justify-content: space-between;

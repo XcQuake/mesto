@@ -4,6 +4,7 @@
   grid-column-gap: 18px;
   grid-row-gap: 16px;
   margin-left: 30px;
+  align-items: baseline;
 }
 
 @media (max-width: 725px) {
