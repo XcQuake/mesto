@@ -11,9 +11,7 @@
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__name/profile__name.css);
-@import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/profile/__description/profile__description.css);
-@import url(../blocks/profile/__add-button/profile__add-button.css);
 
 /* Блок gallery */
 @import url(../blocks/gallery/gallery.css);
@@ -22,7 +20,13 @@
 @import url(../blocks/gallery/__item/gallery__item.css);
 @import url(../blocks/gallery/__description/gallery__description.css);
 @import url(../blocks/gallery/__name/gallery__name.css);
-@import url(../blocks/gallery/__like-button/gallery__like-button.css);
+
+/* Button */
+@import url(../blocks/button/button.css);
+@import url(../blocks/button/_type/button_type_edit-profile.css);
+@import url(../blocks/button/_type/button_type_add.css);
+@import url(../blocks/button/_type/button_type_like.css);
+@import url(../blocks/button/_type/button_type_popup-close.css);
 
 /* Подвал */
 @import url(../blocks/footer/footer.css);
