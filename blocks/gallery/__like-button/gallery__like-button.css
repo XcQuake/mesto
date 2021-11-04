@@ -1,4 +1,4 @@
-.button_type_like {
+.gallery__like-button {
   border: none;
   width: 22px;
   height: 19px;
@@ -8,6 +8,6 @@
   overflow: visible;
 }
 
-.button_type_like:hover {
+.gallery__like-button:hover {
   opacity: .5;
 }

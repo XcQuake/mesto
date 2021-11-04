@@ -16,9 +16,9 @@
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
         <p class="profile__description">Исследователь океана</p>
-        <button class="button button_type_edit-profile" type="button" aria-label="Редактировать"></button>
+        <button class="button profile__edit-button" type="button" aria-label="Редактировать"></button>
       </div>
-      <button class="button button_type_add"></button>
+      <button class="button profile__add-button"></button>
     </section>
     <section class="gallery">
       <ul class="gallery__list">
@@ -26,42 +26,42 @@
           <img src="./images/eiffel.jpg" alt="Эйфелева башня" class="gallery__image">
           <div class="gallery__description">
             <h2 class="gallery__name">Эйфелева башня</h2>
-            <button class="button button_type_like" type="button" aria-label="Поставить лайк"></button>
+            <button class="button gallery__like-button" type="button" aria-label="Поставить лайк"></button>
           </div>
         </li>
         <li class="gallery__item">
           <img src="./images/notredame.jpg" alt="Собор Парижской Богоматери" class="gallery__image">
           <div class="gallery__description">
             <h2 class="gallery__name">Собор Парижской Богоматери</h2>
-            <button class="button button_type_like" type="button" aria-label="Поставить лайк"></button>
+            <button class="button gallery__like-button" type="button" aria-label="Поставить лайк"></button>
           </div>
         </li>
         <li class="gallery__item">
           <img src="./images/louvre.jpg" alt="Лувр" class="gallery__image">
           <div class="gallery__description">
             <h2 class="gallery__name">Лувр</h2>
-            <button class="button button_type_like" type="button" aria-label="Поставить лайк"></button>
+            <button class="button gallery__like-button" type="button" aria-label="Поставить лайк"></button>
           </div>
         </li>
         <li class="gallery__item">
           <img src="./images/paris2.jpg" alt="Париж, Франция" class="gallery__image">
           <div class="gallery__description">
             <h2 class="gallery__name">Париж</h2>
-            <button class="button button_type_like" type="button" aria-label="Поставить лайк"></button>
+            <button class="button gallery__like-button" type="button" aria-label="Поставить лайк"></button>
           </div>
         </li>
         <li class="gallery__item">
           <img src="./images/moulinrouge.jpg" alt="Мулен Руж" class="gallery__image">
           <div class="gallery__description">
             <h2 class="gallery__name">Мулен Руж</h2>
-            <button class="button button_type_like" type="button" aria-label="Поставить лайк"></button>
+            <button class="button gallery__like-button" type="button" aria-label="Поставить лайк"></button>
           </div>
         </li>
         <li class="gallery__item">
           <img src="./images/triomphe.jpg" alt="Триумфальная Арка" class="gallery__image">
           <div class="gallery__description">
             <h2 class="gallery__name">Триумфальная арка</h2>
-            <button class="button button_type_like" type="button" aria-label="Поставить лайк"></button>
+            <button class="button gallery__like-button" type="button" aria-label="Поставить лайк"></button>
           </div>
         </li>
       </ul>
@@ -72,11 +72,11 @@
   </footer>
   <div class="popup">
     <div class="popup__container">
-      <button class="button button_type_popup-close" type="button" aria-label="Закрыть"></button>
+      <button class="button popup__close-button" type="button" aria-label="Закрыть"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__form">
-        <input name="name" type="text" class="popup__input popup__input_type_name" id="name" placeholder="Имя">
-        <input name="description" type="text" class="popup__input popup__input_type_description" id="description" placeholder="О себе">
+        <input name="name" type="text" class="popup__input popup__input_type_name" id="name" placeholder="Имя" maxlength="40" required>
+        <input name="description" type="text" class="popup__input popup__input_type_description" id="description" placeholder="О себе" maxlength="200" required>
         <input type="submit" class="popup__save-button" value="Сохранить">
       </form>
     </div>
