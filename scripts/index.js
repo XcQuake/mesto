@@ -1,8 +1,7 @@
-const popup = document.querySelector('.popup');
+const popups = document.querySelectorAll('.popup');
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
-const closeButton = popup.querySelector('.popup__close-button');
-const formElement = popup.querySelector('.popup__form');
+const formElement = document.querySelector('.popup__form');
 const nameInput = formElement.querySelector('.popup__input_type_name');
 const descriptionInput = formElement.querySelector('.popup__input_type_description');
 const titleInput = formElement.querySelector('.popup__input_type_title');
@@ -11,7 +10,7 @@ const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 const cardTemplate = document.querySelector('.card-template').content;
 const galleryList = document.querySelector('.gallery__list');
-
+const closeButtons = document.querySelectorAll('.popup__close-button');
 
 const initialCards = [
   {
@@ -50,31 +49,40 @@ initialCards.forEach(function (el) {
   galleryList.append(cardElement)
 });
 
-function popupOpen() {
-  nameInput.value = profileName.textContent;
-  descriptionInput.value = profileDescription.textContent;
-  popup.classList.add('popup_opened');
+function popupOpen(i) {
+  if (i === 0) {
+    nameInput.value = profileName.textContent;
+    descriptionInput.value = profileDescription.textContent;
+  }
+
+  popups[i].classList.add('popup_opened');
 };
 
-function popupClose() {
-  popup.classList.remove('popup_opened');
+function popupClose(i) {
+  popups[i].classList.remove('popup_opened');
 };
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileDescription.textContent = descriptionInput.value;
-  popupClose();
+  popupClose(0);
 };
+
+
 
 const likeButtons = document.querySelectorAll('.card__like-button')
 
 likeButtons.forEach(function (el) {
   el.addEventListener('click', function() {
     el.classList.toggle('card__like-button_active')
-  })
-})
+  });
+});
 
-editButton.addEventListener('click', popupOpen);
-closeButton.addEventListener('click', popupClose);
+
+
+editButton.addEventListener('click', () => popupOpen(0));
+addButton.addEventListener('click', () => popupOpen(1));
+closeButtons[0].addEventListener('click', () => popupClose(0));
+closeButtons[1].addEventListener('click', () => popupClose(1));
 formElement.addEventListener('submit', formSubmitHandler);
