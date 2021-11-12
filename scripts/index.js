@@ -6,8 +6,8 @@ const nameInput = formElement.querySelector('.popup__input_type_name');
 const descriptionInput = formElement.querySelector('.popup__input_type_description');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
-const cardTemplate = document.querySelector('.card-template')
-const galleryList = document.querySelector('.gallery__list')
+const cardTemplate = document.querySelector('.card-template').content;
+const galleryList = document.querySelector('.gallery__list');
 
 const initialCards = [
   {
@@ -35,6 +35,15 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+
+initialCards.forEach(function (el) {
+  const cardElement = cardTemplate.cloneNode(true);
+
+  cardElement.querySelector('.card__name').textContent = el.name;
+  cardElement.querySelector('.card__image').src = el.link;
+
+  galleryList.append(cardElement)
+});
 
 function popupOpen() {
   nameInput.value = profileName.textContent;
