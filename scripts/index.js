@@ -12,6 +12,7 @@ const profileDescription = document.querySelector('.profile__description');
 const cardTemplate = document.querySelector('.card-template').content;
 const galleryList = document.querySelector('.gallery__list');
 
+
 const initialCards = [
   {
     title: 'Архыз',
@@ -39,6 +40,7 @@ const initialCards = [
   }
 ];
 
+
 initialCards.forEach(function (el) {
   const cardElement = cardTemplate.cloneNode(true);
 
@@ -65,6 +67,13 @@ function formSubmitHandler(evt) {
   popupClose();
 };
 
+const likeButtons = document.querySelectorAll('.card__like-button')
+
+likeButtons.forEach(function (el) {
+  el.addEventListener('click', function() {
+    el.classList.toggle('card__like-button_active')
+  })
+})
 
 editButton.addEventListener('click', popupOpen);
 closeButton.addEventListener('click', popupClose);
