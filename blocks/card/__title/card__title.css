@@ -1,4 +1,4 @@
-.card__name {
+.card__title {
   margin: 0;
   max-width: calc(100% - 40px);
   text-overflow: ellipsis;

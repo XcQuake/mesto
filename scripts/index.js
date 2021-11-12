@@ -1,9 +1,12 @@
 const popup = document.querySelector('.popup');
 const editButton = document.querySelector('.profile__edit-button');
+const addButton = document.querySelector('.profile__add-button');
 const closeButton = popup.querySelector('.popup__close-button');
 const formElement = popup.querySelector('.popup__form');
 const nameInput = formElement.querySelector('.popup__input_type_name');
 const descriptionInput = formElement.querySelector('.popup__input_type_description');
+const titleInput = formElement.querySelector('.popup__input_type_title');
+const linkInput = formElement.querySelector('.poup__input_type_link');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 const cardTemplate = document.querySelector('.card-template').content;
@@ -11,27 +14,27 @@ const galleryList = document.querySelector('.gallery__list');
 
 const initialCards = [
   {
-    name: 'Архыз',
+    title: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
   },
   {
-    name: 'Челябинская область',
+    title: 'Челябинская область',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
   },
   {
-    name: 'Иваново',
+    title: 'Иваново',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
   },
   {
-    name: 'Камчатка',
+    title: 'Камчатка',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
   },
   {
-    name: 'Холмогорский район',
+    title: 'Холмогорский район',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
   },
   {
-    name: 'Байкал',
+    title: 'Байкал',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
@@ -39,7 +42,7 @@ const initialCards = [
 initialCards.forEach(function (el) {
   const cardElement = cardTemplate.cloneNode(true);
 
-  cardElement.querySelector('.card__name').textContent = el.name;
+  cardElement.querySelector('.card__title').textContent = el.title;
   cardElement.querySelector('.card__image').src = el.link;
 
   galleryList.append(cardElement)
