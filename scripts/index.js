@@ -54,7 +54,6 @@ function popupOpen(i) {
     nameInput.value = profileName.textContent;
     descriptionInput.value = profileDescription.textContent;
   }
-
   popups[i].classList.add('popup_opened');
 };
 
@@ -63,10 +62,15 @@ function popupClose(i) {
 };
 
 function formSubmitHandler(evt) {
-  evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileDescription.textContent = descriptionInput.value;
-  popupClose(0);
+  if (popups[0]) {
+    evt.preventDefault();
+    profileName.textContent = nameInput.value;
+    profileDescription.textContent = descriptionInput.value;
+    popupClose(0);
+  } else {
+    evt.preventDefault();
+    
+  }
 };
 
 
