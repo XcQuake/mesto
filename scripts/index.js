@@ -115,6 +115,21 @@ deleteButtons.forEach(function (el) {
   })
 })
 
+const images = galleryList.querySelectorAll('.card__image');
+
+images.forEach(function (el) {
+  el.addEventListener('click', function() {
+    popups[2].classList.add('popup_opened')
+
+    const popupImage = document.querySelector('.popup__image');
+
+    console.log(el.src)
+
+    popupImage.src = el.src;
+
+    
+  })
+})
 
 editButton.addEventListener('click', () => popupOpen(0));
 addButton.addEventListener('click', () => popupOpen(1));
