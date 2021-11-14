@@ -47,6 +47,7 @@ initialCards.forEach(function (el) {
   
   cardElement.querySelector('.card__title').textContent = el.title;
   cardElement.querySelector('.card__image').src = el.link;
+  cardElement.querySelector('.card__image').alt = el.title;
 
   galleryList.append(cardElement)
 });
@@ -66,6 +67,7 @@ function formSubmitHandler(i) {
 
     cardElement.querySelector('.card__title').textContent = titleInput.value;
     cardElement.querySelector('.card__image').src = linkInput.value;
+    cardElement.querySelector('.card__image').alt = titleInput.value;
 
     cardElement.querySelector('.card__like-button').addEventListener('click', function(evt) {
       const eventTarget = evt.target;
@@ -84,6 +86,7 @@ function formSubmitHandler(i) {
       const cardTitle = cardElement.querySelector('.card__title');
 
       popupImage.src = eventTarget.src;
+      popupImage.alt = cardTitle.textContent;
       popupCaption.textContent = cardTitle.textContent;
 
       popups[2].classList.add('popup_opened')
@@ -138,6 +141,7 @@ images.forEach(function (el) {
     const cardTitle = cardElement.querySelector('.card__title')
 
     popupImage.src = el.src;
+    popupImage.alt = cardTitle.textContent;
     popupCaption.textContent = cardTitle.textContent;
   })
 })
