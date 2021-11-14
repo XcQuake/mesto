@@ -51,6 +51,7 @@ initialCards.forEach(function (el) {
 
 function formSubmitHandler(i) {
   window.event.preventDefault();
+
   if (i === 0) {
     profileName.textContent = nameInput.value;
     profileDescription.textContent = descriptionInput.value;
@@ -66,7 +67,14 @@ function formSubmitHandler(i) {
     cardElement.querySelector('.card__like-button').addEventListener('click', function(evt) {
       const eventTarget = evt.target;
       eventTarget.classList.toggle('card__like-button_active');
-    })
+    });
+
+    cardElement.querySelector('.card__delete-button').addEventListener('click', function(evt) {
+      const eventTarget = evt.target;
+      const cardElement = eventTarget.closest('.card')
+
+      cardElement.remove();
+    });
 
     titleInput.value = '';
     linkInput.value = '';
@@ -90,7 +98,6 @@ function popupClose(i) {
 };
 
 
-
 const likeButtons = document.querySelectorAll('.card__like-button');
 
 likeButtons.forEach(function (el) {
@@ -99,6 +106,14 @@ likeButtons.forEach(function (el) {
   });
 });
 
+const deleteButtons = document.querySelectorAll('.card__delete-button')
+
+deleteButtons.forEach(function (el) {
+  el.addEventListener('click', function() {
+    cardElement = el.closest('.card');
+    cardElement.remove();
+  })
+})
 
 
 editButton.addEventListener('click', () => popupOpen(0));
