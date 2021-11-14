@@ -11,6 +11,8 @@ const profileDescription = document.querySelector('.profile__description');
 const cardTemplate = document.querySelector('.card-template').content;
 const galleryList = document.querySelector('.gallery__list');
 const closeButtons = document.querySelectorAll('.popup__close-button');
+const popupImage = document.querySelector('.popup__image');
+const popupCaption = document.querySelector('.popup__image-caption');
 
 const initialCards = [
   {
@@ -49,6 +51,7 @@ initialCards.forEach(function (el) {
   galleryList.append(cardElement)
 });
 
+
 function formSubmitHandler(i) {
   window.event.preventDefault();
 
@@ -75,6 +78,16 @@ function formSubmitHandler(i) {
 
       cardElement.remove();
     });
+
+    cardElement.querySelector('.card__image').addEventListener('click', function(evt) {
+      const eventTarget = evt.target;
+      const cardTitle = cardElement.querySelector('.card__title');
+
+      popupImage.src = eventTarget.src;
+      popupCaption.textContent = cardTitle.textContent;
+
+      popups[2].classList.add('popup_opened')
+    })
 
     titleInput.value = '';
     linkInput.value = '';
@@ -121,17 +134,11 @@ images.forEach(function (el) {
   el.addEventListener('click', function() {
     popups[2].classList.add('popup_opened')
 
-    const popupImage = document.querySelector('.popup__image');
-    const popupCaption = document.querySelector('.popup__image-caption');
     const cardElement = el.closest('.card');
     const cardTitle = cardElement.querySelector('.card__title')
 
     popupImage.src = el.src;
     popupCaption.textContent = cardTitle.textContent;
-    
-    console.log(cardTitle.textContent)
-    console.log(popupCaption)
-    
   })
 })
 
