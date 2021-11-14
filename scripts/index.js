@@ -122,11 +122,15 @@ images.forEach(function (el) {
     popups[2].classList.add('popup_opened')
 
     const popupImage = document.querySelector('.popup__image');
-
-    console.log(el.src)
+    const popupCaption = document.querySelector('.popup__image-caption');
+    const cardElement = el.closest('.card');
+    const cardTitle = cardElement.querySelector('.card__title')
 
     popupImage.src = el.src;
-
+    popupCaption.textContent = cardTitle.textContent;
+    
+    console.log(cardTitle.textContent)
+    console.log(popupCaption)
     
   })
 })
@@ -135,5 +139,6 @@ editButton.addEventListener('click', () => popupOpen(0));
 addButton.addEventListener('click', () => popupOpen(1));
 closeButtons[0].addEventListener('click', () => popupClose(0));
 closeButtons[1].addEventListener('click', () => popupClose(1));
+closeButtons[2].addEventListener('click', () => popupClose(2));
 formElements[0].addEventListener('submit', () => formSubmitHandler(0));
 formElements[1].addEventListener('submit', () => formSubmitHandler(1));
