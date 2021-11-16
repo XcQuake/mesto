@@ -70,7 +70,7 @@ function createCard(title, link) {
     popupImage.alt = cardTitle.textContent; 
     popupCaption.textContent = cardTitle.textContent;
 
-    popupTypeImage.classList.add('popup_opened');
+    openPopup(popupTypeImage);
   })
   
   galleryList.prepend(cardElement);
