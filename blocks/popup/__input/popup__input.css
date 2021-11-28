@@ -8,8 +8,9 @@
   line-height: 16.94px;
   outline: none;
   box-sizing: border-box;
+  margin-top: 13px;
 }
 
 .popup__input:first-child {
-  margin-bottom: 25px;
+  margin-top: 0;
 }
