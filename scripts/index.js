@@ -14,6 +14,7 @@ const titleInput = document.querySelector('.popup__input_type_title');
 const linkInput = document.querySelector('.popup__input_type_link');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
+const popups = Array.from(document.querySelectorAll('.popup'));
 
 const initialCards = [
   {
@@ -42,6 +43,7 @@ const initialCards = [
   }
 ];
 
+// Создание карточек
 function createCard(title, link) {
   const cardTemplate = document.querySelector('.card-template').content;
   const cardElement = cardTemplate.cloneNode(true);
@@ -102,6 +104,17 @@ function closePopup(popup) {
 initialCards.forEach(function (el) {
   createCard(el.title, el.link)
 });
+
+
+// Закрытие попапа кликом на оверлею
+const overlayClick = (evt) => {
+  if (evt.target.classList.contains('popup')) {
+    closePopup(evt.target);
+}}
+
+popups.forEach(function(popup) {
+  popup.addEventListener('click', overlayClick);
+})
 
 
 // Валидация форм
@@ -185,4 +198,5 @@ cardCloseButton.addEventListener('click', () => closePopup(popupTypeCard))
 imageCloseButton.addEventListener('click', () => closePopup(popupTypeImage));
 formProfile.addEventListener('submit', formSubmitProfile);
 formCard.addEventListener('submit', formSubmitCard);
+document.addEventListener('keydown', (evt) => keyHandler(evt));
 
