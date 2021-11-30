@@ -117,6 +117,16 @@ popups.forEach(function(popup) {
 })
 
 
+//  Закрытие попапа по нажатию на escape
+const keyHandler = (evt) => {
+  const popup = document.querySelector('.popup_opened');
+
+  if (evt.key === 'Escape') {
+    closePopup(popup)
+  }
+}
+
+
 // Валидация форм
 
 const showInputError = (formElement, inputElement, errorMessage) => {
