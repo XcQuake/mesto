@@ -54,13 +54,9 @@ const enableValidation = () => {
   const formList = Array.from(document.querySelectorAll('.popup__form'));
 
   formList.forEach((formElement) => {
-    if (formElement.classList.contains('form_type_profile')) {
-      formElement.addEventListener('submit', submitFormProfile)
-    }
-    
-    if (formElement.classList.contains('form_type_card')) {
-      formElement.addEventListener('submit', submitFormCard)
-    }
+    formElement.addEventListener('submit', function(evt) {
+      evt.preventDefault();
+    });
 
     setEventListeners(formElement);
   });
