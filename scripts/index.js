@@ -95,15 +95,18 @@ function formSubmitCard(event) {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', keyHandler);
 };
 
 function closePopup(popup) {
+  document.removeEventListener('keydown', keyHandler);
   popup.classList.remove('popup_opened');
 };
 
 initialCards.forEach(function (el) {
   createCard(el.title, el.link)
 });
+
 
 
 // Закрытие попапа кликом на оверлею
@@ -125,6 +128,8 @@ const keyHandler = (evt) => {
     closePopup(popup)
   }
 }
+
+
 
 
 // Валидация форм
@@ -208,5 +213,4 @@ cardCloseButton.addEventListener('click', () => closePopup(popupTypeCard))
 imageCloseButton.addEventListener('click', () => closePopup(popupTypeImage));
 formProfile.addEventListener('submit', formSubmitProfile);
 formCard.addEventListener('submit', formSubmitCard);
-document.addEventListener('keydown', (evt) => keyHandler(evt));
 
