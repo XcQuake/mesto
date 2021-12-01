@@ -116,7 +116,7 @@ const overlayClick = (evt) => {
 }}
 
 popups.forEach(function(popup) {
-  popup.addEventListener('click', overlayClick);
+  popup.addEventListener('mousedown', overlayClick);
 })
 
 
