@@ -104,9 +104,24 @@ function openPopup(popup) {
 };
 
 function closePopup(popup) {
+  cleanInput(popup);
   document.removeEventListener('keydown', pressEscape);
   popup.classList.remove('popup_opened');
 };
+
+function cleanInput(popup) {
+  const errorElements = popup.querySelectorAll('.popup__input-error');
+  const inputElements = popup.querySelectorAll('.popup__input')
+
+  errorElements.forEach((errorElement) => {
+    errorElement.classList.remove('popup__input-error_active')
+  })
+
+  inputElements.forEach((inputElement) => {
+    inputElement.classList.remove('popup__input_error')
+    inputElement.value = '';
+  })
+}
 
 initialCards.forEach(function (el) {
   insertCard(el.title, el.link)
