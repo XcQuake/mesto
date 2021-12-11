@@ -40,6 +40,10 @@ const initialCards = [
   }
 ];
 
+import {Card} from './Card.js'
+
+console.log(Card)
+
 // Создание карточек
 function createCard(title, link) {
   const cardTemplate = document.querySelector('.card-template').content;
@@ -98,7 +102,7 @@ function submitFormCard(event) {
   closePopup(popupTypeCard);
 };
 
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', pressEscape);
 };
@@ -123,8 +127,12 @@ function cleanInput(popup) {
   })
 }
 
-initialCards.forEach(function (el) {
-  insertCard(el.title, el.link)
+initialCards.forEach((item) => {
+  const galleryList = document.querySelector('.gallery__list');
+  const card = new Card(item);
+  const cardElement = card.generateCard();
+
+  galleryList.prepend(cardElement);
 });
 
 
