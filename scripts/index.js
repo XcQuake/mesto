@@ -14,7 +14,7 @@ const popups = Array.from(document.querySelectorAll('.popup'));
 const forms = Array.from(document.querySelectorAll('.popup__form'));
 
 const validateConfig = {
-  formSelector: '.popup__form',
+  form: '.popup__form',
   inputSelector: '.popup__input',
   buttonSelector: '.popup__save-button',
   buttonInactiveClass: 'popup__save-button_inactive',
