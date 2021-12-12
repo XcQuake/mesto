@@ -35,6 +35,7 @@ const toggleButtonState = (inputList, buttonElement) => {
   } else {
     buttonElement.classList.remove('popup__save-button_inactive');
   }
+  console.log(hasInvalidInput(inputList)) 
 };
 
 const setEventListeners = (formElement) => {
@@ -44,7 +45,9 @@ const setEventListeners = (formElement) => {
   toggleButtonState(inputList, buttonElement);
 
   inputList.forEach((inputElement) => {
+    console.log('test2')
     inputElement.addEventListener('input', function() {
+      console.log('test')
       checkInputValidity(formElement, inputElement);
       toggleButtonState(inputList, buttonElement);
     });
