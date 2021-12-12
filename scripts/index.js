@@ -48,50 +48,8 @@ const initialCards = [
   }
 ];
 
-<<<<<<< HEAD
 import {Card} from './Card.js'
 import {FormValidator} from './FormValidator.js'
-=======
-// Создание карточек
-function createCard(title, link) {
-  const cardTemplate = document.querySelector('.card-template').content;
-  const cardElement = cardTemplate.cloneNode(true);
-  const likeButton = cardElement.querySelector('.card__like-button');
-  const deleteButton = cardElement.querySelector('.card__delete-button');
-  const cardTitle = cardElement.querySelector('.card__title');
-  const cardImage = cardElement.querySelector('.card__image');
-
-  cardTitle.textContent = title;
-  cardImage.src = link;
-  cardImage.alt = title;
-
-  likeButton.addEventListener('click', function() {
-    likeButton.classList.toggle('card__like-button_active');
-  });
-
-  deleteButton.addEventListener('click', function() {
-    deleteButton.closest('.card').remove();
-  });
-
-  cardImage.addEventListener('click', function() {
-    const popupImage = document.querySelector('.popup__image');
-    const popupCaption = document.querySelector('.popup__image-caption');
-
-    popupImage.src = cardImage.src; 
-    popupImage.alt = cardTitle.textContent; 
-    popupCaption.textContent = cardTitle.textContent;
-
-    openPopup(popupTypeImage);
-  })
-  
-  return (cardElement);
-}
-
-function insertCard(title, link) {
-  const galleryList = document.querySelector('.gallery__list');
-  galleryList.prepend(createCard(title, link))
-}
->>>>>>> parent of e88126f (создать класс Card)
 
 function submitFormProfile(event) {
   event.preventDefault();
@@ -116,7 +74,7 @@ function submitFormCard(event) {
   closePopup(popupTypeCard);
 };
 
-function openPopup(popup) {
+export default function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', pressEscape);
 };
@@ -150,7 +108,6 @@ function cleanInput(popup) {
   })
 }
 
-<<<<<<< HEAD
 // Функция создания карточки
 function createCard(item) {
   const card = new Card(item, '.card-template');
@@ -158,11 +115,6 @@ function createCard(item) {
 
   return cardElement;
 }
-=======
-initialCards.forEach(function (el) {
-  insertCard(el.title, el.link)
-});
->>>>>>> parent of e88126f (создать класс Card)
 
 // Функция вставки карточки в DOM
 function insertCard(item) {
