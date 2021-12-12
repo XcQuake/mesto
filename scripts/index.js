@@ -11,8 +11,9 @@ const linkInput = document.querySelector('.popup__input_type_link');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 const popups = Array.from(document.querySelectorAll('.popup'));
+const forms = Array.from(document.querySelectorAll('.popup__form'));
 
-const formValidate = {
+const validateConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   buttonSelector: '.popup__save-button',
@@ -48,8 +49,8 @@ const initialCards = [
   }
 ];
 
-import {Card} from './Card.js'
-import {FormValidator} from './FormValidator.js'
+import Card from './Card.js'
+import FormValidator from './FormValidator.js'
 
 function submitFormProfile(event) {
   event.preventDefault();
@@ -71,6 +72,7 @@ function submitFormCard(event) {
   titleInput.value = '';
   linkInput.value = '';
   saveButton.classList.add('popup__save-button_inactive');
+  saveButton.disabled = true;
   closePopup(popupTypeCard);
 };
 
@@ -122,11 +124,19 @@ function insertCard(item) {
   galleryList.prepend(createCard(item));
 }
 
+initialCards.forEach((item) => {
+  insertCard(item);
+});
+
 // Функция валидации форм
-function validateForms(element) {
-  const formValidator = new FormValidator(element);
+function validateForm(element, formSelector) {
+  const formValidator = new FormValidator(element, formSelector);
   formValidator.enableValidation();
 }
+
+forms.forEach((form) => {
+  validateForm(validateConfig, form);
+})
 
 // Слушатели
 popups.forEach((popup) => {
@@ -152,8 +162,5 @@ formProfile.addEventListener('submit', submitFormProfile);
 formCard.addEventListener('submit', submitFormCard);
 
 
-initialCards.forEach((item) => {
-  insertCard(item);
-});
 
-validateForms(formValidate);
+
