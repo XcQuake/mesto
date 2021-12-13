@@ -1,3 +1,21 @@
+const popupTypeProfile = document.querySelector('.popup_type_profile');
+const popupTypeCard = document.querySelector('.popup_type_card');
+const editButton = document.querySelector('.profile__edit-button');
+const addButton = document.querySelector('.profile__add-button');
+const formProfile = document.querySelector('.popup_type_profile .popup__form');
+const formCard = document.querySelector('.popup_type_card .popup__form')
+const nameInput = document.querySelector('.popup__input_type_name');
+const descriptionInput = document.querySelector('.popup__input_type_description');
+const titleInput = document.querySelector('.popup__input_type_title');
+const linkInput = document.querySelector('.popup__input_type_link');
+const profileName = document.querySelector('.profile__name');
+const profileDescription = document.querySelector('.profile__description');
+const popups = Array.from(document.querySelectorAll('.popup'));
+const forms = Array.from(document.querySelectorAll('.popup__form'));
+const popupTypeImage = document.querySelector('.popup_type_image');
+const popupImage = document.querySelector('.popup__image');
+const popupCaption = document.querySelector('.popup__image-caption');
+
 const initialCards = [
   {
     title: 'Архыз',
@@ -24,6 +42,7 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+
 const validateConfig = {
   form: '.popup__form',
   inputSelector: '.popup__input',
@@ -31,6 +50,26 @@ const validateConfig = {
   buttonInactiveClass: 'popup__save-button_inactive',
   activeErrorClass: 'popup__input-error_active',
   inputErrorClass: 'popup__input_error'
-}
+};
 
-export {initialCards, validateConfig};
+export {
+  popupTypeProfile, 
+  popupTypeCard,
+  editButton,
+  addButton,
+  formProfile,
+  formCard,
+  nameInput,
+  descriptionInput,
+  titleInput,
+  linkInput,
+  profileName,
+  profileDescription,
+  popups,
+  forms,
+  popupTypeImage,
+  popupImage,
+  popupCaption,
+  initialCards,
+  validateConfig
+};

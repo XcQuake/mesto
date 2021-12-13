@@ -1,21 +1,23 @@
-const popupTypeProfile = document.querySelector('.popup_type_profile');
-const popupTypeCard = document.querySelector('.popup_type_card');
-const editButton = document.querySelector('.profile__edit-button');
-const addButton = document.querySelector('.profile__add-button');
-const formProfile = document.querySelector('.popup_type_profile .popup__form');
-const formCard = document.querySelector('.popup_type_card .popup__form')
-const nameInput = document.querySelector('.popup__input_type_name');
-const descriptionInput = document.querySelector('.popup__input_type_description');
-const titleInput = document.querySelector('.popup__input_type_title');
-const linkInput = document.querySelector('.popup__input_type_link');
-const profileName = document.querySelector('.profile__name');
-const profileDescription = document.querySelector('.profile__description');
-const popups = Array.from(document.querySelectorAll('.popup'));
-const forms = Array.from(document.querySelectorAll('.popup__form'));
-
-import {initialCards, validateConfig} from './constants.js'
-import Card from './Card.js'
-import FormValidator from './FormValidator.js'
+import {
+  popupTypeProfile, 
+  popupTypeCard,
+  editButton,
+  addButton,
+  formProfile,
+  formCard,
+  nameInput,
+  descriptionInput,
+  titleInput,
+  linkInput,
+  profileName,
+  profileDescription,
+  popups,
+  forms,
+  initialCards,
+  validateConfig
+} from './constants.js';
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 function submitFormProfile(event) {
   event.preventDefault();
@@ -43,9 +45,11 @@ export default function openPopup(popup) {
 };
 
 function closePopup(popup) {
-  const currentForm = popup.querySelector('.popup__form');
-
-  cleanInput(validateConfig, currentForm);
+  if (!popup.classList.contains('popup_type_image')) {
+    const currentForm = popup.querySelector('.popup__form');
+    cleanInput(validateConfig, currentForm);
+  }
+  
   document.removeEventListener('keydown', pressEscape);
   popup.classList.remove('popup_opened');
 };
