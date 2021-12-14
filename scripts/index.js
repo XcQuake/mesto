@@ -12,12 +12,14 @@ import {
   profileName,
   profileDescription,
   popups,
-  forms,
   initialCards,
   validateConfig
 } from './constants.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+
+const profileFormValidator = new FormValidator(validateConfig, formProfile);
+const cardFormValidator = new FormValidator(validateConfig, formCard);
 
 function submitFormProfile(event) {
   event.preventDefault();
@@ -35,7 +37,7 @@ function submitFormCard(event) {
   event.preventDefault();
 
   insertCard(newCard);
-  resetForm(validateConfig, formCard);
+  cardFormValidator.resetForm();
   closePopup(popupTypeCard);
 };
 
@@ -45,11 +47,6 @@ export default function openPopup(popup) {
 };
 
 function closePopup(popup) {
-  if (!popup.classList.contains('popup_type_image')) {
-    const currentForm = popup.querySelector('.popup__form');
-    cleanInput(validateConfig, currentForm);
-  }
-  
   document.removeEventListener('keydown', pressEscape);
   popup.classList.remove('popup_opened');
 };
@@ -79,28 +76,6 @@ function insertCard(item) {
 initialCards.forEach((item) => {
   insertCard(item);
 });
-
-// Функция валидации форм
-function validateForm(config, form) {
-  const formValidator = new FormValidator(config, form);
-  formValidator.enableValidation();
-}
-
-forms.forEach((form) => {
-  validateForm(validateConfig, form);
-});
-
-// Функция очищения формы 
-function resetForm(config, form) {
-  const formValidator = new FormValidator(config, form);
-  formValidator.resetForm();
-}
-
-// Функция очищения инпутов
-function cleanInput(config, form) {
-  const formValidator = new FormValidator(config, form);
-  formValidator.cleanInput();
-}
  
 // Слушатели
 popups.forEach((popup) => {
@@ -117,14 +92,22 @@ popups.forEach((popup) => {
   });
 });
 
-editButton.addEventListener('click', function() {
+editButton.addEventListener('click', () => {
+  profileFormValidator.cleanInput();
   nameInput.value = profileName.textContent;
   descriptionInput.value = profileDescription.textContent;
-  openPopup(popupTypeProfile)});
-addButton.addEventListener('click', () => openPopup(popupTypeCard));
+  openPopup(popupTypeProfile);
+});
+
+addButton.addEventListener('click', () =>{
+  cardFormValidator.cleanInput();
+  openPopup(popupTypeCard);
+});
+
 formProfile.addEventListener('submit', submitFormProfile);
 formCard.addEventListener('submit', submitFormCard);
 
-
+cardFormValidator.enableValidation();
+profileFormValidator.enableValidation();
 
 

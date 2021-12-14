@@ -11,7 +11,6 @@ const linkInput = document.querySelector('.popup__input_type_link');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 const popups = Array.from(document.querySelectorAll('.popup'));
-const forms = Array.from(document.querySelectorAll('.popup__form'));
 const popupTypeImage = document.querySelector('.popup_type_image');
 const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__image-caption');
@@ -66,7 +65,6 @@ export {
   profileName,
   profileDescription,
   popups,
-  forms,
   popupTypeImage,
   popupImage,
   popupCaption,
