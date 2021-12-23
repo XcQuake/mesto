@@ -69,5 +69,5 @@ export {
   popupImage,
   popupCaption,
   initialCards,
-  validateConfig
+  validateConfig,
 };

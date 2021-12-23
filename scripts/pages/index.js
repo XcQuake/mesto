@@ -13,10 +13,12 @@ import {
   profileDescription,
   popups,
   initialCards,
-  validateConfig
-} from './constants.js';
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
+  validateConfig,
+} from '../utils/constants.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import Popup from '../components/Popup.js';
 
 const profileFormValidator = new FormValidator(validateConfig, formProfile);
 const cardFormValidator = new FormValidator(validateConfig, formCard);
@@ -29,14 +31,14 @@ function submitFormProfile(event) {
 }
 
 function submitFormCard(event) {
-  const newCard = {
+  const item = {
     title: titleInput.value,
     link: linkInput.value
   }
 
   event.preventDefault();
-
-  insertCard(newCard);
+  
+  insertCard(item);
   cardFormValidator.resetForm();
   closePopup(popupTypeCard);
 };
@@ -51,31 +53,27 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 };
 
+const cardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    insertCard(item);
+  }}, '.gallery__list'
+)
+
+// Функция создания карточки
+function insertCard(item) {
+  const card = new Card(item, '.card-template');
+  const cardElement = card.generateCard();
+  cardList.addItem(cardElement);
+};
+
 //  Закрытие попапа по нажатию на escape
 const pressEscape = (evt) => {
   if (evt.key === 'Escape') {
     const popup = document.querySelector('.popup_opened');
     closePopup(popup)
   }
-}
-
-// Функция создания карточки
-function createCard(item) {
-  const card = new Card(item, '.card-template');
-  const cardElement = card.generateCard();
-
-  return cardElement;
-}
-
-// Функция вставки карточки в DOM
-function insertCard(item) {
-  const galleryList = document.querySelector('.gallery__list');
-  galleryList.prepend(createCard(item));
-}
-
-initialCards.forEach((item) => {
-  insertCard(item);
-});
+};
  
 // Слушатели
 popups.forEach((popup) => {
@@ -109,5 +107,6 @@ formCard.addEventListener('submit', submitFormCard);
 
 cardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
+cardList.renderItems();
 
 
