@@ -19,9 +19,13 @@ import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import Popup from '../components/Popup.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 
 const profileFormValidator = new FormValidator(validateConfig, formProfile);
 const cardFormValidator = new FormValidator(validateConfig, formCard);
+const popupCard = new Popup('.popup_type_card');
+const popupProfile = new Popup('.popup_type_profile');
+
 
 function submitFormProfile(event) {
   event.preventDefault();
@@ -62,7 +66,7 @@ const cardList = new Section({
 
 // Функция создания карточки
 function insertCard(item) {
-  const card = new Card(item, '.card-template');
+  const card = new Card(item, handleCardClick, '.card-template');
   const cardElement = card.generateCard();
   cardList.addItem(cardElement);
 };
@@ -74,6 +78,11 @@ const pressEscape = (evt) => {
     closePopup(popup)
   }
 };
+
+const handleCardClick = (item) => {
+  const popupImage = new PopupWithImage('.popup_type_image', item)
+  popupImage.open();
+}
  
 // Слушатели
 popups.forEach((popup) => {
@@ -94,12 +103,12 @@ editButton.addEventListener('click', () => {
   profileFormValidator.cleanInput();
   nameInput.value = profileName.textContent;
   descriptionInput.value = profileDescription.textContent;
-  openPopup(popupTypeProfile);
+  popupProfile.open();
 });
 
 addButton.addEventListener('click', () =>{
   cardFormValidator.cleanInput();
-  openPopup(popupTypeCard);
+  popupCard.open();
 });
 
 formProfile.addEventListener('submit', submitFormProfile);
