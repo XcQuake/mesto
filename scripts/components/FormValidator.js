@@ -71,8 +71,6 @@ export default class FormValidator {
   }
 
   cleanInput() {
-    this._form.reset();
-
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
     });
