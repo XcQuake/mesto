@@ -32,13 +32,11 @@ const cardList = new Section({
 
 // Попапы с формой
 const popupCardForm = new PopupWithForm({
-  submitForm: (item) => {createCard(item)}, 
-  resetForm: () => {cardFormValidator.resetForm()}
+  submitForm: (item) => {insertCard(item)}
 }, '.popup_type_card');
 
 const popupProfileForm = new PopupWithForm({
-  submitForm: (item) => {userInfo.setUserInfo(item)}, 
-  resetForm: () => {profileFormValidator.resetForm()}
+  submitForm: (item) => {userInfo.setUserInfo(item)}
 }, '.popup_type_profile');
 
 // Информация о пользователе
@@ -67,12 +65,14 @@ editButton.addEventListener('click', () => {
   profileFormValidator.cleanInput();
   nameInput.value = userInfo.getUserInfo().name;
   descriptionInput.value = userInfo.getUserInfo().description;
+  profileFormValidator.resetForm();
   popupProfileForm.open();
   popupProfileForm.setEventListener();
 });
 
 addButton.addEventListener('click', () =>{
   cardFormValidator.cleanInput();
+  cardFormValidator.resetForm();
   popupCardForm.open();
   popupCardForm.setEventListener();
 });
