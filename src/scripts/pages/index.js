@@ -20,10 +20,14 @@ import '../../pages/index.css';
 const profileFormValidator = new FormValidator(validateConfig, formProfile);
 const cardFormValidator = new FormValidator(validateConfig, formCard);
 
+// Попап с изображением
+const popupWithImage = new PopupWithImage('.popup_type_image');
+popupWithImage.setEventListener();
+
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    createCard(item);
+    insertCard(item);
 }}, '.gallery__list');
 
 // Попапы с формой
@@ -45,17 +49,18 @@ const userInfo = new UserInfo({
 
 // Функция создания карточки
 function createCard(item) {
-  const card = new Card(item, handleCardClick, '.card-template');
+  const card = new Card(item, '.card-template', () => {
+    popupWithImage.open(item.link, item.title)
+  });
   const cardElement = card.generateCard();
-  cardList.addItem(cardElement);
+  return cardElement;
 };
 
-// Функция открытия попапа с изображением
-const handleCardClick = (item) => {
-  const popupImage = new PopupWithImage('.popup_type_image', item);
-  popupImage.open();
-  popupImage.setEventListener();
-}
+// Функция добавления карточки в разметку
+function insertCard(item) {
+  const cardElement = createCard(item);
+  cardList.addItem(cardElement);
+};
 
 // Слушатели
 editButton.addEventListener('click', () => {
