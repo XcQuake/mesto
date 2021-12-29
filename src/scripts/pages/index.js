@@ -65,9 +65,12 @@ function insertCard(item) {
 // Слушатели
 editButton.addEventListener('click', () => {
   profileFormValidator.cleanInput();
-  nameInput.value = userInfo.getUserInfo().name;
-  descriptionInput.value = userInfo.getUserInfo().description;
   profileFormValidator.resetForm();
+  
+  const {name, description} = userInfo.getUserInfo();
+  nameInput.value = name;
+  descriptionInput.value = description;
+
   popupProfileForm.open();
 });
 
