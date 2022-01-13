@@ -35,8 +35,8 @@ const initialCards = [
 const validateConfig = {
   form: '.popup__form',
   inputSelector: '.popup__input',
-  buttonSelector: '.popup__save-button',
-  buttonInactiveClass: 'popup__save-button_inactive',
+  buttonSelector: '.popup__confirm-button',
+  buttonInactiveClass: 'popup__confirm-button_inactive',
   activeErrorClass: 'popup__input-error_active',
   inputErrorClass: 'popup__input_error'
 };
