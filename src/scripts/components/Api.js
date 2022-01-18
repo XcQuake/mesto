@@ -19,4 +19,12 @@ export default class Api {
         }
       })
   }
+
+  getInitialCards() {
+    return fetch(`${this._link}/cards`, {method: 'GET', headers: this._headers})
+      .then(res => {
+        if (res.ok) return res.json();
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+  }
 }

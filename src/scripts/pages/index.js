@@ -5,7 +5,6 @@ import {
   formCard,
   nameInput,
   descriptionInput,
-  initialCards,
   validateConfig,
   avatar,
   formAvatar
@@ -34,6 +33,11 @@ api.getUserInfo()
     userInfo.setAvatar(res)
   })
 
+api.getInitialCards()
+  .then(res => {
+    res.forEach(el => insertCard(el))
+  })
+
 // Валидаторы форм
 const profileFormValidator = new FormValidator(validateConfig, formProfile);
 const cardFormValidator = new FormValidator(validateConfig, formCard);
@@ -44,7 +48,7 @@ const popupWithImage = new PopupWithImage('.popup_type_image');
 popupWithImage.setEventListener();
 
 const cardList = new Section({
-  items: initialCards,
+  items: [],
   renderer: (item) => {
     insertCard(item);
 }}, '.gallery__list');
