@@ -7,6 +7,8 @@ import {
   descriptionInput,
   initialCards,
   validateConfig,
+  avatar,
+  formAvatar
 } from '../utils/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -35,6 +37,7 @@ api.getUserInfo()
 // Валидаторы форм
 const profileFormValidator = new FormValidator(validateConfig, formProfile);
 const cardFormValidator = new FormValidator(validateConfig, formCard);
+const avatarFormValidator = new FormValidator(validateConfig, formAvatar);
 
 // Попап с изображением
 const popupWithImage = new PopupWithImage('.popup_type_image');
@@ -57,10 +60,16 @@ const popupProfileForm = new PopupWithForm({
 }, '.popup_type_profile');
 popupProfileForm.setEventListener();
 
+const popupAvatarForm = new PopupWithForm({
+  submitForm: (item) => {userInfo.setAvatar(item)}
+}, '.popup_type_avatar');
+popupAvatarForm.setEventListener();
+
 // Информация о пользователе
 const userInfo = new UserInfo({
   nameSelector: '.profile__name',
-  descriptionSelector: '.profile__description'
+  descriptionSelector: '.profile__description',
+  avatarSelector: '.profile__avatar-image'
 })
 
 // Функция создания карточки
@@ -96,8 +105,15 @@ addButton.addEventListener('click', () =>{
   popupCardForm.open();
 });
 
+avatar.addEventListener('click', () => {
+  avatarFormValidator.cleanInput();
+  avatarFormValidator.resetForm();
+  popupAvatarForm.open()
+})
+
 cardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
 cardList.renderItems();
 
 
