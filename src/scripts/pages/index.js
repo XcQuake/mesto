@@ -14,7 +14,23 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
 import '../../pages/index.css';
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-34',
+  headers: {
+    authorization: 'cdf51df7-343c-4e9d-927b-02e53e8e2930',
+    'Content-Type': 'application/json'
+  }
+})
+
+// Информация о пользователе с сервера
+api.getUserInfo()
+  .then(res => {
+    userInfo.setUserInfo(res),
+    userInfo.setAvatar(res)
+  })
 
 // Валидаторы форм
 const profileFormValidator = new FormValidator(validateConfig, formProfile);
