@@ -7,7 +7,7 @@ import {
   descriptionInput,
   validateConfig,
   avatar,
-  formAvatar
+  formAvatar,
 } from '../utils/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -60,12 +60,18 @@ const popupCardForm = new PopupWithForm({
 popupCardForm.setEventListener();
 
 const popupProfileForm = new PopupWithForm({
-  submitForm: (item) => {userInfo.setUserInfo(item)}
+  submitForm: (item) => {
+    userInfo.setUserInfo(item), 
+    api.changeProfile(item)
+  }
 }, '.popup_type_profile');
 popupProfileForm.setEventListener();
 
 const popupAvatarForm = new PopupWithForm({
-  submitForm: (item) => {userInfo.setAvatar(item)}
+  submitForm: (item) => {
+    userInfo.setAvatar(item),
+    api.changeAvatar(item)
+  }
 }, '.popup_type_avatar');
 popupAvatarForm.setEventListener();
 

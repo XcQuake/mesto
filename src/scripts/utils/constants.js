@@ -25,5 +25,5 @@ export {
   descriptionInput,
   validateConfig,
   avatar,
-  formAvatar
+  formAvatar,
 };

@@ -26,5 +26,26 @@ export default class Api {
         if (res.ok) return res.json();
         return Promise.reject(`Ошибка: ${res.status}`);
       })
+  changeProfile(data) {
+    return fetch(`${this._link}/users/me`, {
+      method: 'PATCH', 
+      headers: this._headers, 
+      body: JSON.stringify({
+        name: data.name,
+        about: data.description
+      })
+    })
+  }
+
+  changeAvatar(item) {
+    return fetch(`${this._link}/users/me/avatar`, {
+      method: 'PATCH', 
+      headers: this._headers, 
+      body: JSON.stringify({
+        avatar: item.link
+      })
+    })
+  }
+
   }
 }
