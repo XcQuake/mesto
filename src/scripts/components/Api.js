@@ -47,5 +47,14 @@ export default class Api {
     })
   }
 
+  addCard(item) {
+    return fetch(`${this._link}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: item.name,
+        link: item.link
+      })
+    })
   }
 }

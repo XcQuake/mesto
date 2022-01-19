@@ -55,7 +55,10 @@ const cardList = new Section({
 
 // Попапы с формой
 const popupCardForm = new PopupWithForm({
-  submitForm: (item) => {insertCard(item)}
+  submitForm: (item) => {
+    insertCard(item),
+    api.addCard(item)
+  }
 }, '.popup_type_card');
 popupCardForm.setEventListener();
 
@@ -85,7 +88,7 @@ const userInfo = new UserInfo({
 // Функция создания карточки
 function createCard(item) {
   const card = new Card(item, '.card-template', () => {
-    popupWithImage.open(item.link, item.title)
+    popupWithImage.open(item.link, item.name)
   });
   const cardElement = card.generateCard();
   return cardElement;
