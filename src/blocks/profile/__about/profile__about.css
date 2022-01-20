@@ -1,4 +1,4 @@
-.profile__description {
+.profile__about {
   margin: 0;
   font-weight: 400;
   font-size: 18px;
@@ -12,13 +12,13 @@
 }
 
 @media (max-width: 725px) {
-  .profile__description {
+  .profile__about {
     text-align: center;
   }
 }
 
 @media (max-width: 425px) {
-  .profile__description {
+  .profile__about {
     font-size: 14px;
     line-height: 16.94px;
   }

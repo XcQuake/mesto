@@ -11,13 +11,7 @@ export default class Api {
         if (res.ok) return res.json();
         return Promise.reject(`Ошибка: ${res.status}`);
       })
-      .then(res => {
-        return {
-          name: res.name,
-          description: res.about,
-          link: res.avatar
-        }
-      })
+      .catch(err => console.log(err))
   }
 
   getInitialCards() {
@@ -32,7 +26,7 @@ export default class Api {
       headers: this._headers, 
       body: JSON.stringify({
         name: data.name,
-        about: data.description
+        about: data.about
       })
     })
   }

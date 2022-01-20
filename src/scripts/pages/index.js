@@ -4,7 +4,7 @@ import {
   formProfile,
   formCard,
   nameInput,
-  descriptionInput,
+  aboutInput,
   validateConfig,
   avatar,
   formAvatar,
@@ -81,7 +81,7 @@ popupAvatarForm.setEventListener();
 // Информация о пользователе
 const userInfo = new UserInfo({
   nameSelector: '.profile__name',
-  descriptionSelector: '.profile__description',
+  aboutSelector: '.profile__about',
   avatarSelector: '.profile__avatar-image'
 })
 
@@ -104,10 +104,10 @@ function insertCard(item) {
 editButton.addEventListener('click', () => {
   profileFormValidator.cleanInput();
   profileFormValidator.resetForm();
-  
-  const {name, description} = userInfo.getUserInfo();
+
+  const {name, about} = userInfo.getUserInfo();
   nameInput.value = name;
-  descriptionInput.value = description;
+  aboutInput.value = about;
 
   popupProfileForm.open();
 });
@@ -122,7 +122,7 @@ avatar.addEventListener('click', () => {
   avatarFormValidator.cleanInput();
   avatarFormValidator.resetForm();
   popupAvatarForm.open()
-})
+});
 
 cardFormValidator.enableValidation();
 profileFormValidator.enableValidation();

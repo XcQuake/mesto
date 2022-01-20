@@ -4,7 +4,7 @@ const formProfile = document.querySelector('.popup_type_profile .popup__form');
 const formCard = document.querySelector('.popup_type_card .popup__form');
 const formAvatar = document.querySelector('.popup_type_avatar .popup__form')
 const nameInput = document.querySelector('.popup__input_type_name');
-const descriptionInput = document.querySelector('.popup__input_type_description');
+const aboutInput = document.querySelector('.popup__input_type_about');
 const avatar = document.querySelector('.profile__avatar');
 
 const validateConfig = {
@@ -22,7 +22,7 @@ export {
   formProfile,
   formCard,
   nameInput,
-  descriptionInput,
+  aboutInput,
   validateConfig,
   avatar,
   formAvatar,
