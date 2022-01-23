@@ -8,6 +8,7 @@
   background-image: url(../../../images/delete-icon.svg);
   border: none;
   transition-duration: .6s;
+  display: block;
 }
 
 .card__delete-button:hover {

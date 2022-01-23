@@ -50,5 +50,12 @@ export default class Api {
         link: item.link
       })
     })
+
+  deleteCard(cardId) {
+    return fetch(`${this._link}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+      .then(processResult)
   }
 }

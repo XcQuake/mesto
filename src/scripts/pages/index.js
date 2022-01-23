@@ -78,6 +78,19 @@ const popupAvatarForm = new PopupWithForm({
 }, '.popup_type_avatar');
 popupAvatarForm.setEventListener();
 
+// Попап удаления карточки
+const popupCardDelete = new PopupWithConfirm({
+  submitForm: (data) => promiseDeleteCard(data)
+}, '.popup_type_card-delete');
+popupCardDelete.setEventListener();
+
+function promiseDeleteCard(data) {
+  api.deleteCard(data.cardId)
+      .then(() => data.card.remove())
+      .then(() => popupCardDelete.close())
+      .catch(err => console.log(err))
+}
+
 // Информация о пользователе
 const userInfo = new UserInfo({
   nameSelector: '.profile__name',
@@ -90,6 +103,7 @@ function createCard(item) {
   const card = new Card(item, '.card-template', () => {
     popupWithImage.open(item.link, item.name)
   });
+        handleDeleteCard: (data) => popupCardDelete.open(data),
   const cardElement = card.generateCard();
   return cardElement;
 };
