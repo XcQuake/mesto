@@ -1,3 +1,8 @@
+const processResult = res => {
+  if (res.ok) return res.json();
+  return Promise.reject(`Ошибка: ${res.status}`);
+}
+
 export default class Api {
   constructor({baseUrl, headers}) {
     this._link = baseUrl;
@@ -6,12 +11,11 @@ export default class Api {
   }
   
   getUserInfo() {
-    return fetch(`${this._link}/users/me`, {method: 'GET', headers: this._headers})
-      .then(res => {
-        if (res.ok) return res.json();
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch(err => console.log(err))
+    return fetch(`${this._link}/users/me`, {
+      method: 'GET', 
+      headers: this._headers
+    })
+      .then(processResult)
   }
 
   getInitialCards() {
@@ -21,24 +25,28 @@ export default class Api {
         return Promise.reject(`Ошибка: ${res.status}`);
       })
   changeProfile(data) {
+
+  changeProfile({name, about}) {
     return fetch(`${this._link}/users/me`, {
       method: 'PATCH', 
       headers: this._headers, 
       body: JSON.stringify({
-        name: data.name,
-        about: data.about
+        name: name,
+        about: about
       })
     })
+      .then(processResult)
   }
 
   changeAvatar(item) {
     return fetch(`${this._link}/users/me/avatar`, {
-      method: 'PATCH', 
-      headers: this._headers, 
+      method: 'PATCH',
+      headers: this._headers,
       body: JSON.stringify({
-        avatar: item.link
+        avatar: item.avatar
       })
     })
+      .then(processResult)
   }
 
   addCard(item) {

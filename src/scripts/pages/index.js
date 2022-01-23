@@ -27,11 +27,11 @@ const api = new Api({
   }
 })
 
-// Информация о пользователе с сервера
-api.getUserInfo()
-  .then(res => {
-    userInfo.setUserInfo(res),
-    userInfo.setAvatar(res)
+api.getFullData()
+  .then(([user, cards]) => {
+    userInfo.setUserInfo(user),
+    userInfo.setAvatar(user),
+    cards.forEach(el => insertCard(el, user))
   })
 
 api.getInitialCards()
@@ -64,20 +64,28 @@ const popupCardForm = new PopupWithForm({
 popupCardForm.setEventListener();
 
 const popupProfileForm = new PopupWithForm({
-  submitForm: (item) => {
-    userInfo.setUserInfo(item), 
-    api.changeProfile(item)
-  }
+  submitForm: (item) => promiseChangeProfile(item)
 }, '.popup_type_profile');
 popupProfileForm.setEventListener();
 
+function promiseChangeProfile(item) {
+  api.changeProfile(item)
+      .then(() => userInfo.setUserInfo(item))
+      .then(() => popupProfileForm.close())
+      .catch(err => console.log(err))
+}
+
 const popupAvatarForm = new PopupWithForm({
-  submitForm: (item) => {
-    userInfo.setAvatar(item),
-    api.changeAvatar(item)
-  }
+  submitForm: (item) => promiseChangeAvatar(item)
 }, '.popup_type_avatar');
 popupAvatarForm.setEventListener();
+
+function promiseChangeAvatar(item) {
+  api.changeAvatar(item)
+    .then(() => userInfo.setAvatar(item))
+    .then(() => popupAvatarForm.close())
+    .catch(err => console.log(err))
+}
 
 // Попап удаления карточки
 const popupCardDelete = new PopupWithConfirm({
