@@ -6,6 +6,7 @@ const formAvatar = document.querySelector('.popup_type_avatar .popup__form')
 const nameInput = document.querySelector('.popup__input_type_name');
 const aboutInput = document.querySelector('.popup__input_type_about');
 const avatar = document.querySelector('.profile__avatar');
+const likeCounter = document.querySelector('.card__like-counter')
 
 const validateConfig = {
   form: '.popup__form',
@@ -26,4 +27,5 @@ export {
   validateConfig,
   avatar,
   formAvatar,
+  likeCounter
 };

@@ -8,6 +8,7 @@ import {
   validateConfig,
   avatar,
   formAvatar,
+  likeCounter
 } from '../utils/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -104,6 +105,10 @@ function createCard(item) {
     popupWithImage.open(item.link, item.name)
   });
         handleDeleteCard: (data) => popupCardDelete.open(data),
+        handlePutLike: (cardId) => api.putLikeCard(cardId),
+        handleDeleteLike: (cardId) => api.deleteLikeCard(cardId)
+      }, '.card-template'
+  );
   const cardElement = card.generateCard();
   return cardElement;
 };

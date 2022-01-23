@@ -50,6 +50,21 @@ export default class Api {
         link: item.link
       })
     })
+  putLikeCard(cardId) {
+    return fetch(`${this._link}/cards/${cardId}/likes`, {
+      method: 'PUT',
+      headers: this._headers
+    })
+      .then(processResult)
+  }
+
+  deleteLikeCard(cardId) {
+    return fetch(`${this._link}/cards/${cardId}/likes`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+      .then(processResult)
+  }
 
   deleteCard(cardId) {
     return fetch(`${this._link}/cards/${cardId}`, {
