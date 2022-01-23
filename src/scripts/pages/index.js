@@ -15,6 +15,7 @@ import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithConfirm from '../components/PopupWithConfirm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 import '../../pages/index.css';
@@ -33,12 +34,8 @@ api.getFullData()
     userInfo.setAvatar(user),
     cards.forEach(el => insertCard(el, user))
   })
-
-api.getInitialCards()
-  .then(res => {
-    res.forEach(el => insertCard(el))
-  })
-
+  .catch(err => console.log(err))
+  
 // Валидаторы форм
 const profileFormValidator = new FormValidator(validateConfig, formProfile);
 const cardFormValidator = new FormValidator(validateConfig, formCard);
@@ -54,15 +51,22 @@ const cardList = new Section({
     insertCard(item);
 }}, '.gallery__list');
 
-// Попапы с формой
+// Попап добавления карточки
 const popupCardForm = new PopupWithForm({
-  submitForm: (item) => {
-    insertCard(item),
-    api.addCard(item)
-  }
+  submitForm: (item) => promiseAddCard(item)
 }, '.popup_type_card');
 popupCardForm.setEventListener();
 
+function promiseAddCard(item) {
+  Promise.all([api.addCard(item), api.getUserInfo()])
+      .then(([card, user]) => {
+        insertCard(card, user, 'prepend')
+        popupCardForm.close()
+      })
+      .catch(err => console.log(err))
+}
+
+// Попапы изменения данных профиля
 const popupProfileForm = new PopupWithForm({
   submitForm: (item) => promiseChangeProfile(item)
 }, '.popup_type_profile');
@@ -107,11 +111,16 @@ const userInfo = new UserInfo({
   avatarSelector: '.profile__avatar-image'
 })
 
+// Функция добавления карточки в разметку
+function insertCard(item, user, method) {
+  const cardElement = createCard(item, user);
+  cardList.addItem(cardElement, method);
+};
+
 // Функция создания карточки
-function createCard(item) {
-  const card = new Card(item, '.card-template', () => {
-    popupWithImage.open(item.link, item.name)
-  });
+function createCard(item, user) {
+  const card = new Card({item, user},{
+        handleCardClick: () => popupWithImage.open(item.link, item.name),
         handleDeleteCard: (data) => popupCardDelete.open(data),
         handlePutLike: (cardId) => api.putLikeCard(cardId),
         handleDeleteLike: (cardId) => api.deleteLikeCard(cardId)
@@ -119,12 +128,6 @@ function createCard(item) {
   );
   const cardElement = card.generateCard();
   return cardElement;
-};
-
-// Функция добавления карточки в разметку
-function insertCard(item) {
-  const cardElement = createCard(item);
-  cardList.addItem(cardElement);
 };
 
 // Слушатели

@@ -19,12 +19,16 @@ export default class Api {
   }
 
   getInitialCards() {
-    return fetch(`${this._link}/cards`, {method: 'GET', headers: this._headers})
-      .then(res => {
-        if (res.ok) return res.json();
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-  changeProfile(data) {
+    return fetch(`${this._link}/cards`, {
+      method: 'GET', 
+      headers: this._headers
+    })
+      .then(processResult) 
+  }
+
+  getFullData() {
+    return Promise.all([this.getUserInfo(), this.getInitialCards()]);
+  }
 
   changeProfile({name, about}) {
     return fetch(`${this._link}/users/me`, {
@@ -58,6 +62,9 @@ export default class Api {
         link: item.link
       })
     })
+      .then(processResult)
+  }
+
   putLikeCard(cardId) {
     return fetch(`${this._link}/cards/${cardId}/likes`, {
       method: 'PUT',
