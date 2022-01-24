@@ -29,8 +29,7 @@ export default class PopupWithConfirm extends Popup {
     super.open()
   }
 
-  close() {
+  setButtonText() {
     this._submitButton.textContent = this._defaultButtonText;
-    super.close()
   }
 }

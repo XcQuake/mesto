@@ -63,6 +63,7 @@ function promiseAddCard(item) {
         popupCardForm.close()
       })
       .catch(err => console.log(err))
+      .finally(() => popupCardForm.setButtonText())
 }
 
 // Попапы изменения данных профиля
@@ -73,9 +74,12 @@ popupProfileForm.setEventListener();
 
 function promiseChangeProfile(item) {
   api.changeProfile(item)
-      .then(() => userInfo.setUserInfo(item))
-      .then(() => popupProfileForm.close())
+      .then((data) => {
+        userInfo.setUserInfo(data);
+        popupProfileForm.close();
+      })
       .catch(err => console.log(err))
+      .finally(() => popupProfileForm.setButtonText())
 }
 
 const popupAvatarForm = new PopupWithForm({
@@ -85,9 +89,12 @@ popupAvatarForm.setEventListener();
 
 function promiseChangeAvatar(item) {
   api.changeAvatar(item)
-    .then(() => userInfo.setAvatar(item))
-    .then(() => popupAvatarForm.close())
+    .then(() => {
+      userInfo.setAvatar(item);
+      popupAvatarForm.close();
+    })
     .catch(err => console.log(err))
+    .finally(() => popupAvatarForm.setButtonText())
 }
 
 // Попап удаления карточки
@@ -98,9 +105,12 @@ popupCardDelete.setEventListener();
 
 function promiseDeleteCard(data) {
   api.deleteCard(data.cardId)
-      .then(() => data.card.remove())
-      .then(() => popupCardDelete.close())
+      .then(() => {
+        data.card.remove()
+        popupCardDelete.close()
+      })
       .catch(err => console.log(err))
+      .finally(() => popupCardDelete.setButtonText())
 }
 
 // Информация о пользователе
