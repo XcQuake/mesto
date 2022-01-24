@@ -1,13 +1,13 @@
-const processResult = res => {
-  if (res.ok) return res.json();
-  return Promise.reject(`Ошибка: ${res.status}`);
-}
-
 export default class Api {
   constructor({baseUrl, headers}) {
     this._link = baseUrl;
     this._headers = headers;
     this._token = headers.authorization;
+  }
+
+  _processResult(res) {
+    if (res.ok) return res.json();
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
   
   getUserInfo() {
@@ -15,7 +15,7 @@ export default class Api {
       method: 'GET', 
       headers: this._headers
     })
-      .then(processResult)
+      .then(res => this._processResult(res))
   }
 
   getInitialCards() {
@@ -23,7 +23,7 @@ export default class Api {
       method: 'GET', 
       headers: this._headers
     })
-      .then(processResult) 
+      .then(res => this._processResult(res)) 
   }
 
   getFullData() {
@@ -39,7 +39,7 @@ export default class Api {
         about: about
       })
     })
-      .then(processResult)
+      .then(res => this._processResult(res))
   }
 
   changeAvatar(item) {
@@ -50,7 +50,7 @@ export default class Api {
         avatar: item.avatar
       })
     })
-      .then(processResult)
+      .then(res => this._processResult(res))
   }
 
   addCard(item) {
@@ -62,7 +62,7 @@ export default class Api {
         link: item.link
       })
     })
-      .then(processResult)
+      .then(res => this._processResult(res))
   }
 
   putLikeCard(cardId) {
@@ -70,7 +70,7 @@ export default class Api {
       method: 'PUT',
       headers: this._headers
     })
-      .then(processResult)
+      .then(res => this._processResult(res))
   }
 
   deleteLikeCard(cardId) {
@@ -78,7 +78,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     })
-      .then(processResult)
+      .then(res => this._processResult(res))
   }
 
   deleteCard(cardId) {
@@ -86,6 +86,6 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     })
-      .then(processResult)
+      .then(res => this._processResult(res))
   }
 }
