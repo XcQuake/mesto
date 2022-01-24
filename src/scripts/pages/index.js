@@ -18,6 +18,7 @@ import PopupWithConfirm from '../components/PopupWithConfirm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 import '../../pages/index.css';
+let userId;
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-34',
@@ -29,12 +30,13 @@ const api = new Api({
 
 api.getFullData()
   .then(([user, cards]) => {
-    userInfo.setUserInfo(user),
-    userInfo.setAvatar(user),
-    cards.forEach(el => insertCard(el, user))
+    userId = user._id;
+    userInfo.setUserInfo(user);
+    userInfo.setAvatar(user);
+    cards.forEach(el => insertCard(el));
   })
   .catch(err => console.log(err))
-  
+
 // Валидаторы форм
 const profileFormValidator = new FormValidator(validateConfig, formProfile);
 const cardFormValidator = new FormValidator(validateConfig, formCard);
@@ -50,6 +52,8 @@ const cardList = new Section({
     insertCard(item);
 }}, '.gallery__list');
 
+
+
 // Попап добавления карточки
 const popupCardForm = new PopupWithForm({
   submitForm: (item) => promiseAddCard(item)
@@ -57,9 +61,9 @@ const popupCardForm = new PopupWithForm({
 popupCardForm.setEventListener();
 
 function promiseAddCard(item) {
-  Promise.all([api.addCard(item), api.getUserInfo()])
-      .then(([card, user]) => {
-        insertCard(card, user, 'prepend')
+  api.addCard(item)
+      .then((card) => {
+        insertCard(card, 'prepend')
         popupCardForm.close()
       })
       .catch(err => console.log(err))
@@ -121,14 +125,14 @@ const userInfo = new UserInfo({
 })
 
 // Функция добавления карточки в разметку
-function insertCard(item, user, method) {
-  const cardElement = createCard(item, user);
+function insertCard(item, method) {
+  const cardElement = createCard(item);
   cardList.addItem(cardElement, method);
 };
 
 // Функция создания карточки
-function createCard(item, user) {
-  const card = new Card({item, user},{
+function createCard(item) {
+  const card = new Card({item, userId},{
         handleCardClick: () => popupWithImage.open(item.link, item.name),
         handleDeleteCard: (data) => popupCardDelete.open(data),
         handlePutLike: () => handleLikeCard(),
@@ -181,5 +185,3 @@ cardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
 avatarFormValidator.enableValidation();
 cardList.renderItems();
-
-
