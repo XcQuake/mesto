@@ -121,13 +121,27 @@ function createCard(item, user) {
   const card = new Card({item, user},{
         handleCardClick: () => popupWithImage.open(item.link, item.name),
         handleDeleteCard: (data) => popupCardDelete.open(data),
-        handlePutLike: (cardId) => api.putLikeCard(cardId),
-        handleDeleteLike: (cardId) => api.deleteLikeCard(cardId)
+        handlePutLike: () => handleLikeCard(),
+        handleDeleteLike: () => handleDeleteLike()
       }, '.card-template'
   );
+
+  function handleLikeCard() {
+    api.putLikeCard(card.getId())
+      .then((data) => card.setLikesInfo(data))
+      .catch(err => console.log(err));
+  }
+
+  function handleDeleteLike() {
+    api.deleteLikeCard(card.getId())
+      .then((data) => card.setLikesInfo(data))
+      .catch((err) => console.log(err));
+  }
+
   const cardElement = card.generateCard();
   return cardElement;
 };
+
 
 // Слушатели
 editButton.addEventListener('click', () => {
