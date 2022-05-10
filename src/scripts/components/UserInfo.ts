@@ -1,4 +1,4 @@
-import { IUserData } from '../models/interfaces';
+import { IUserData } from '../models/Interfaces';
 
 interface ISelectors {
   nameSelector: string,
@@ -10,10 +10,6 @@ export class UserInfo {
   private name: Element;
   private about: Element;
   private avatar: HTMLImageElement;
-  private data: {
-    name: string,
-    about: string,
-  };
 
   constructor({nameSelector, aboutSelector, avatarSelector}: ISelectors) {
     this.name = document.querySelector(nameSelector);
@@ -21,11 +17,11 @@ export class UserInfo {
     this.avatar = document.querySelector(avatarSelector);
   }
 
-  getUserInfo() {
-    this.data['name'] = this.name.textContent;
-    this.data['about'] = this.about.textContent;
-
-    return this.data
+  getUserInfo(): {name: string, about: string;} {
+    return {
+      name: this.name.textContent,
+      about: this.about.textContent,
+    }
   }
 
   setUserInfo(user: IUserData): void {
