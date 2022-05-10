@@ -21,13 +21,13 @@ export class PopupWithForm extends Popup {
   }
 
   private getInputValues(): object {
-    this.data = {};
+    const data = {};
 
     this.inputList.forEach((input: HTMLInputElement) => {
-      this.data[input.name] = input.value;
+      data[input.name] = input.value;
     })
 
-    return this.data;
+    return data;
   }
 
   private handler(evt: Event): void {
