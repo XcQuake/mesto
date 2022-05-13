@@ -1,6 +1,6 @@
 import { ApiConfig, ICardData, IUserData } from '../models/Interfaces';
 
-export default class Api {
+export class Api {
   private link: string;
   private headers: {
     authorization: string,

@@ -8,17 +8,18 @@ import {
   validateConfig,
   avatar,
   formAvatar
-} from '../utils/constants.js';
-import Card from '../components/Card.js';
-import FormValidator from '../components/FormValidator.js';
-import Section from '../components/Section.js';
-import PopupWithImage from '../components/PopupWithImage.js';
-import PopupWithForm from '../components/PopupWithForm.js';
-import PopupWithConfirm from '../components/PopupWithConfirm.js';
-import UserInfo from '../components/UserInfo.js';
-import Api from '../components/Api.js';
+} from '../utils/constants';
+import { Card }from '../components/Card';
+import { FormValidator } from '../components/FormValidator';
+import { Section } from '../components/Section';
+import { PopupWithImage } from '../components/PopupWithImage';
+import { PopupWithForm } from '../components/PopupWithForm';
+import { PopupWithConfirm } from '../components/PopupWithConfirm';
+import { UserInfo } from '../components/UserInfo';
+import { Api } from '../components/Api';
 import '../../pages/index.css';
-let userId;
+import { IUserData, ICardData } from '../models/Interfaces';
+let userId: string;
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-34',
@@ -29,7 +30,7 @@ const api = new Api({
 })
 
 api.getFullData()
-  .then(([user, cards]) => {
+  .then(([user, cards]: [IUserData, ICardData[]]) => {
     userId = user._id;
     userInfo.setUserInfo(user);
     userInfo.setAvatar(user);
@@ -48,90 +49,90 @@ popupWithImage.setEventListener();
 
 const cardList = new Section({
   items: [],
-  renderer: (item) => {
-    insertCard(item);
-}}, '.gallery__list');
-
-
+  renderer: (item: ICardData) => {insertCard(item)},
+  containerSelector: '.gallery__list',
+});
 
 // Попап добавления карточки
 const popupCardForm = new PopupWithForm({
-  submitForm: (item) => promiseAddCard(item)
+  submitForm: (card: {name: string, link: string}) => promiseAddCard(card)
 }, '.popup_type_card');
 popupCardForm.setEventListener();
 
-function promiseAddCard(item) {
-  api.addCard(item)
-      .then((card) => {
+function promiseAddCard(card: {name: string, link: string}) {
+  api.addCard(card)
+      .then((card: ICardData) => {
         insertCard(card, 'prepend')
         popupCardForm.close()
       })
-      .catch(err => console.log(err))
-      .finally(() => popupCardForm.setButtonText())
+      .catch((err: Error) => console.log(err))
+      .finally(() => popupCardForm.resetButtonText())
 }
 
 // Попапы изменения данных профиля
 const popupProfileForm = new PopupWithForm({
-  submitForm: (item) => promiseChangeProfile(item)
+  submitForm: (user: IUserData) => promiseChangeProfile(user)
 }, '.popup_type_profile');
 popupProfileForm.setEventListener();
 
-function promiseChangeProfile(item) {
-  api.changeProfile(item)
-      .then((data) => {
-        userInfo.setUserInfo(data);
+function promiseChangeProfile(user: IUserData) {
+  api.changeProfile(user)
+      .then((user: IUserData) => {
+        userInfo.setUserInfo(user);
         popupProfileForm.close();
       })
-      .catch(err => console.log(err))
-      .finally(() => popupProfileForm.setButtonText())
+      .catch((err: Error) => console.log(err))
+      .finally(() => popupProfileForm.resetButtonText())
 }
 
 const popupAvatarForm = new PopupWithForm({
-  submitForm: (item) => promiseChangeAvatar(item)
+  submitForm: (user: IUserData) => promiseChangeAvatar(user)
 }, '.popup_type_avatar');
 popupAvatarForm.setEventListener();
 
-function promiseChangeAvatar(item) {
-  api.changeAvatar(item)
-    .then(() => {
-      userInfo.setAvatar(item);
+function promiseChangeAvatar(user: IUserData) {
+  api.changeAvatar(user)
+    .then((user: IUserData) => {
+      userInfo.setAvatar(user);
       popupAvatarForm.close();
     })
-    .catch(err => console.log(err))
-    .finally(() => popupAvatarForm.setButtonText())
+    .catch((err: Error) => console.log(err))
+    .finally(() => popupAvatarForm.resetButtonText())
 }
 
 // Попап удаления карточки
 const popupCardDelete = new PopupWithConfirm({
-  submitForm: (data) => promiseDeleteCard(data)
+  submitForm: (data: {card: HTMLElement, cardId: string}) => {
+    promiseDeleteCard(data)
+  }
 }, '.popup_type_card-delete');
 popupCardDelete.setEventListener();
 
-function promiseDeleteCard(data) {
+function promiseDeleteCard(data: {card: HTMLElement, cardId: string}) {
   api.deleteCard(data.cardId)
       .then(() => {
         data.card.remove()
         popupCardDelete.close()
       })
-      .catch(err => console.log(err))
-      .finally(() => popupCardDelete.setButtonText())
+      .catch((err: Error) => console.log(err))
+      .finally(() => popupCardDelete.resetButtonText())
 }
 
 // Информация о пользователе
 const userInfo = new UserInfo({
   nameSelector: '.profile__name',
   aboutSelector: '.profile__about',
-  avatarSelector: '.profile__avatar-image'
+  avatarSelector: '.profile__avatar-image',
 })
 
 // Функция добавления карточки в разметку
-function insertCard(item, method) {
-  const cardElement = createCard(item);
+function insertCard(card: ICardData, method: string = 'append') {
+  const cardElement = createCard(card);
   cardList.addItem(cardElement, method);
 };
 
 // Функция создания карточки
-function createCard(item) {
+function createCard(item: ICardData) {
   const card = new Card({item, userId},{
         handleCardClick: () => popupWithImage.open(item.link, item.name),
         handleDeleteCard: (data) => popupCardDelete.open(data),
@@ -141,15 +142,15 @@ function createCard(item) {
   );
 
   function handleLikeCard() {
-    api.putLikeCard(card.getId())
+    api.putLikeCard(card.id)
       .then((data) => card.setLikesInfo(data))
-      .catch(err => console.log(err));
+      .catch((err: Error) => console.log(err));
   }
 
   function handleDeleteLike() {
-    api.deleteLikeCard(card.getId())
+    api.deleteLikeCard(card.id)
       .then((data) => card.setLikesInfo(data))
-      .catch((err) => console.log(err));
+      .catch((err: Error) => console.log(err));
   }
 
   const cardElement = card.generateCard();
