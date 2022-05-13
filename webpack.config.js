@@ -1,14 +1,14 @@
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
 
 module.exports = {
-  entry: { main: './src/scripts/pages/index.js'},
-  output: { 
+  entry: { main: './src/scripts/pages/index.ts'},
+  output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',
-      publicPath: ''
+    clean: true,
+    publicPath: ''
   },
   mode: 'development',
   devServer: {
@@ -17,13 +17,19 @@ module.exports = {
     port: 8080,
     open: true
   },
+  devtool: 'inline-source-map',
   module: {
     rules: [
     {
-      test: /\.js$/,
-      use: 'babel-loader',
-      exclude: '/node_modules/'
+      test: /\.tsx?$/,
+      use: 'ts-loader',
+      exclude: '/node_modules/',
     },
+    // {
+    //   test: /\.js$/,
+    //   use: 'babel-loader',
+    //   exclude: '/node_modules/'
+    // },
     {
       test: /\.(png|svg|jpg|jpeg|gif)$/,
       type: 'asset/resource',
@@ -47,9 +53,11 @@ module.exports = {
     },
   ]
   },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
   plugins: [
     new HtmlWebpackPlugin({template: './src/index.html'}),
-    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
   ],
 }
