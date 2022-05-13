@@ -1,13 +1,13 @@
 import { ICardData, IUserData } from "../models/Interfaces";
 
 interface Handlers {
-  handleCardClick: (image: HTMLImageElement) => void;
+  handleCardClick: () => void;
   handleDeleteCard: (data: object) => void;
   handlePutLike: () => void;
   handleDeleteLike: () => void;
 }
 
-export default class Card {
+export class Card {
   private title: string;
   private link: string;
   private owner: IUserData;
@@ -15,7 +15,7 @@ export default class Card {
   private cardId: string;
   private userId: string;
 
-  private handleCardClick: (image: HTMLImageElement) => void;
+  private handleCardClick: () => void;
   private handleDeleteCard: (data: object) => void;
   private handlePutLike: () => void;
   private handleDeleteLike: () => void;
@@ -84,7 +84,7 @@ export default class Card {
     });
 
     this.cardImage.addEventListener('click', () => {
-      this.handleCardClick(this.cardImage);
+      this.handleCardClick();
     });
   }
 
