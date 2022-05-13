@@ -1,3 +1,6 @@
+![Top Language](https://img.shields.io/github/languages/top/XcQuake/mesto?style=flat-square&logo=appveyor)
+![Repo Size](https://img.shields.io/github/repo-size/XcQuake/mesto?style=flat-square&logo=appveyor)
+
 # Проект: "Место"
 
 "Mesto" - сервис для обмена фотографиями, созданная в рамках учебы в Яндекс.Практикум на курсе "Веб-разработчик".
@@ -6,7 +9,7 @@
 
 ![screenshot](./src/images/mesto.png)
 
-## Функционал:
+## Функционал
 
 - Просмотр фотографий.
 - Редактирование профиля.
@@ -17,7 +20,7 @@
 - Подгрузка информации с сервера.
 - Валидация форм.
 
-## Технологии:
+## Технологии
 
 - HTML5
 - CSS3
@@ -28,7 +31,7 @@
 - Webpack
 - Api
 
-## Инструкция по установке:
+## Инструкция по установке
 
 1.  Клонировать репозиторий
 
